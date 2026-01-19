@@ -369,7 +369,6 @@
     </div>
 
     <section data-aos="fade-up" class="invitation-text">
-        <h2>Invitation</h2>
         <p>
             2020년 겨울에 만난 두 사람이<br> 
             여섯 번의 해를 지나 따스한 봄날,<br>
@@ -648,7 +647,7 @@
         
         // ⚠️ TODO: 카카오 개발자 키 설정 필요 (https://developers.kakao.com)
         try {
-            Kakao.init('YOUR_KAKAO_JAVASCRIPT_KEY'); // 여기에 키 입력
+            Kakao.init('d7688320a63338713247d609ec6b9db2'); // 여기에 키 입력
         } catch(e) {}
 
         function shareKakao() {
@@ -658,7 +657,7 @@
                     content: {
                         title: '김준용 ♥ 김건희 결혼합니다',
                         description: '2026년 3월 7일 아펠가모 반포',
-                        imageUrl: 'https://본인도메인/images/thumb.jpg', // ⚠️ 웹에 올라간 실제 이미지 주소여야 함
+                        imageUrl: 'https://junyong.github.io/wedding-invitation/images/thumb.jpg', // ⚠️ 웹에 올라간 실제 이미지 주소여야 함
                         link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
                     },
                     buttons: [{ title: '청첩장 보기', link: { mobileWebUrl: window.location.href, webUrl: window.location.href } }]
@@ -783,4 +782,5 @@
         }, { once: true });
     </script>
 </body>
+
 </html>
