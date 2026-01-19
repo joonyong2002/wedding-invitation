@@ -15,12 +15,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
 
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js" integrity="sha384-l+xbElFSnPZ2rOaPrU//2FF5B4LB8FiX5q4fXYTlvy74jIFrcu0kCpLEkKGYNKdL" crossorigin="anonymous"></script>
 
     <style>
         /* [전역 변수] */
         :root {
-            --main-color: #1a1a1a; /* 글자색을 더 진한 블랙에 가깝게 변경 */
+            --main-color: #1a1a1a; 
             --bg-color: #fff;
             --accent-color: #8c7b64; 
             --point-color: #d68a9f; 
@@ -37,7 +36,6 @@
             line-height: 2.2;
             word-break: keep-all;
             overflow-x: hidden;
-            /* [변경] 기본 굵기를 500(Medium)으로 올려서 전체적으로 또렷하게 */
             font-weight: 500; 
         }
 
@@ -49,7 +47,7 @@
             margin-bottom: 40px; 
             letter-spacing: 3px; 
             text-transform: uppercase; 
-            font-weight: 700; /* 제목은 Bold */
+            font-weight: 700; 
         }
         .divider {
             width: 100%; height: 1px; background: #ddd;
@@ -63,23 +61,23 @@
             padding: 50px 20px 30px 20px; text-align: center;
         }
         .hero-text .names { 
-            font-size: 1.6rem; 
-            font-weight: 700; /* 이름 아주 굵게 */
+            font-size: 1.5rem; 
+            font-weight: 700; 
             margin: 20px 0; 
             color: #000;
         }
         .hero-text .date-place { 
-            color: #444; /* 날짜도 더 진하게 */
-            font-size: 0.9rem;
+            color: #444; 
+            font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 1px;
         }
 
-        /* [Invitation Text] 본문 굵기 강화 */
+        /* [Invitation Text] */
         .invitation-text p {
-            font-size: 1.1rem; 
-            font-weight: 500; /* 본문 Medium */
-            color: #222; /* 진한 회색 */
+            font-size: 0.9rem; 
+            font-weight: 500; 
+            color: #222; 
         }
 
         /* [Profile Section] */
@@ -102,7 +100,7 @@
         }
         .profile-desc {
             font-size: 0.8rem; color: #444; line-height: 1.8;
-            font-weight: 500; /* 설명글도 또렷하게 */
+            font-weight: 500; 
             word-break: keep-all; letter-spacing: -0.02em;
         }
 
@@ -214,15 +212,8 @@
             color: white; border: none; border-radius: 0; cursor: pointer; font-family: inherit; font-weight: 600;
         }
 
-        /* [Ending & Share] */
+        /* [Ending] */
         .ending-photo img { width: 100%; }
-        .share-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 40px; }
-        .btn-share {
-            padding: 12px 25px; border-radius: 0; border: 1px solid #ccc;
-            font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 8px;
-            background: white; color: #333; font-family: inherit; font-weight: 600;
-        }
-        .btn-kakao { background: #FEE500; border-color: #FEE500; color: #000; }
 
         footer { font-size: 0.8rem; color: #aaa; padding: 60px 20px; background: #222; color: #888; text-align: center;}
         
@@ -255,7 +246,7 @@
     <div class="hero">
         <img src="images/main.jpg" alt="Main Photo">
         <div class="hero-text" data-aos="fade-up">
-            <div style="color:var(--accent-color); font-weight:700; letter-spacing:3px; margin-bottom:15px; font-size:0.9rem;">WEDDING INVITATION</div>
+            <h2>WEDDING INVITATION</h2>
             <div class="names">김준용 <span style="font-size:1.5rem;">&</span> 김건희</div>
             <div class="date-place">2026. 03. 07 SAT 12:30 PM<br>아펠가모 반포</div>
         </div>
@@ -275,8 +266,8 @@
             격려해 주시면 감사하겠습니다.
         </p>
         
-        <div style="margin-top: 40px; font-size: 1.15rem; letter-spacing: 1px;">
-            <strong>김해규 · 조한숙</strong>의 아들 <strong>준용</strong><br>
+        <div style="margin-top: 40px; font-size: 1.0rem; letter-spacing: 1px;">
+            <strong>김준용 · 조한숙</strong>의 아들 <strong>준용</strong><br>
             <strong>김동진 · 박경우</strong>의 딸 <strong>건희</strong>
         </div>
 
@@ -387,15 +378,35 @@
                         <span>국민 28190204081132</span>
                         <button class="btn-copy" onclick="copyText('28190204081132')">복사</button>
                     </div>
-                     </div>
+                    <div class="account-row">
+                        <span>김해규</span>
+                        <span>국민 009210332036</span>
+                        <button class="btn-copy" onclick="copyText('009210332036')">복사</button>
+                    </div>
+                    <div class="account-row">
+                        <span>조한숙</span>
+                        <span>국민 24370104225441</span>
+                        <button class="btn-copy" onclick="copyText('24370104225441')">복사</button>
+                    </div>
+                </div>
             </div>
             <div class="accordion-item">
                 <button class="accordion-header" onclick="toggleAccordion(this)">신부측 계좌번호</button>
                 <div class="accordion-content">
                     <div class="account-row">
                         <span>김건희</span>
-                        <span>국민 28190204081132</span>
-                        <button class="btn-copy" onclick="copyText('28190204081132')">복사</button>
+                        <span>국민 07920204204998</span>
+                        <button class="btn-copy" onclick="copyText('07920204204998')">복사</button>
+                    </div>
+                    <div class="account-row">
+                        <span>김동진</span>
+                        <span>신한 110505635726</span>
+                        <button class="btn-copy" onclick="copyText('110505635726')">복사</button>
+                    </div>
+                    <div class="account-row">
+                        <span>박경우</span>
+                        <span>신한 110505624637</span>
+                        <button class="btn-copy" onclick="copyText('110505624637')">복사</button>
                     </div>
                 </div>
             </div>
@@ -436,16 +447,6 @@
         <div style="margin-top:30px; font-size:1rem; color:#555; letter-spacing: 1px;">
             저희의 시작을 함께해주셔서 감사합니다.
         </div>
-
-        <div class="share-buttons">
-            <button class="btn-share btn-kakao" onclick="shareKakao()">
-                <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png" alt="카톡" style="width:20px;">
-                카카오톡 공유
-            </button>
-            <button class="btn-share btn-link" onclick="copyLink()">
-                🔗 링크 복사
-            </button>
-        </div>
     </section>
 
     <footer>
@@ -456,147 +457,126 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // 0. 초기화
         AOS.init({ once: true, offset: 100 });
 
         // 1. D-Day
-        const weddingDate = new Date('2026-03-07T12:30:00');
-        const dDayText = document.getElementById('d-day-text');
+        var weddingDate = new Date('2026-03-07T12:30:00');
+        var dDayText = document.getElementById('d-day-text');
         
         function updateDday() {
-            const now = new Date();
-            const diff = weddingDate - now;
+            var now = new Date();
+            var diff = weddingDate - now;
             if (diff > 0) {
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-                const minutes = Math.floor((diff / (1000 * 60)) % 60);
-                const seconds = Math.floor((diff / 1000) % 60);
-                dDayText.innerHTML = `<div style="margin-bottom:10px; color:#888;">두 사람이 하나가 되기까지</div><div class="countdown-timer"><span style="color:var(--point-color); font-weight:bold; font-size:1.3rem;">${days}일</span> ${hours}시간 ${minutes}분 ${seconds}초<br><span style="font-size:0.9rem; color:#555;">남았습니다</span></div>`;
+                var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                var minutes = Math.floor((diff / (1000 * 60)) % 60);
+                var seconds = Math.floor((diff / 1000) % 60);
+                dDayText.innerHTML = '<div style="margin-bottom:10px; color:#888;">두 사람이 하나가 되기까지</div><div class="countdown-timer"><span style="color:var(--point-color); font-weight:bold; font-size:1.3rem;">' + days + '일</span> ' + hours + '시간 ' + minutes + '분 ' + seconds + '초<br><span style="font-size:0.9rem; color:#555;">남았습니다</span></div>';
             } else {
                 dDayText.innerHTML = "결혼식이 진행되었습니다."; clearInterval(timer);
             }
         }
-        const timer = setInterval(updateDday, 1000); updateDday();
+        var timer = setInterval(updateDday, 1000); updateDday();
 
         // 2. Gallery
-        const PHOTO_COUNT = 28; const VISIBLE_COUNT = 9; const PHOTO_PATH = 'images/photo_';
-        const grid = document.getElementById('gallery-grid');
-        let isExpanded = false;
+        var PHOTO_COUNT = 28; 
+        var VISIBLE_COUNT = 9; 
+        var PHOTO_PATH = 'images/photo_';
+        var grid = document.getElementById('gallery-grid');
+        var isExpanded = false;
         
         function renderGallery() {
-            let html = '';
-            for(let i=1; i<=PHOTO_COUNT; i++) {
-                const hidden = i > VISIBLE_COUNT ? 'hidden' : '';
-                let src = `${PHOTO_PATH}${i}.jpg`; 
-                html += `<div class="gallery-item ${hidden}" onclick="openLightbox('${src}')"><img src="${src}" loading="lazy"></div>`;
+            var html = '';
+            for(var i=1; i<=PHOTO_COUNT; i++) {
+                var hidden = i > VISIBLE_COUNT ? 'hidden' : '';
+                var src = PHOTO_PATH + i + '.jpg'; 
+                html += '<div class="gallery-item ' + hidden + '" onclick="openLightbox(\'' + src + '\')"><img src="' + src + '" loading="lazy"></div>';
             }
             grid.innerHTML = html;
         }
         
         function toggleGallery() {
-            const items = document.querySelectorAll('.gallery-item');
-            const btn = document.getElementById('btn-toggle');
-            if(!isExpanded) { items.forEach(i=>i.classList.remove('hidden')); btn.innerText="사진 접기"; isExpanded=true; }
-            else { items.forEach((i,idx)=>{if(idx>=VISIBLE_COUNT) i.classList.add('hidden')}); btn.innerText="사진 더보기"; isExpanded=false; document.getElementById('gallery-section').scrollIntoView({behavior:'smooth'}); }
+            var items = document.querySelectorAll('.gallery-item');
+            var btn = document.getElementById('btn-toggle');
+            if(!isExpanded) { 
+                items.forEach(function(i){ i.classList.remove('hidden') }); 
+                btn.innerText="사진 접기"; isExpanded=true; 
+            } else { 
+                items.forEach(function(i,idx){ if(idx>=VISIBLE_COUNT) i.classList.add('hidden') }); 
+                btn.innerText="사진 더보기"; isExpanded=false; 
+                document.getElementById('gallery-section').scrollIntoView({behavior:'smooth'}); 
+            }
         }
         renderGallery();
 
         // 3. Lightbox
-        const lightbox = document.getElementById('lightbox');
-        const lbImg = document.getElementById('lightbox-img');
+        var lightbox = document.getElementById('lightbox');
+        var lbImg = document.getElementById('lightbox-img');
         function openLightbox(src) { lbImg.src=src; lightbox.style.display='flex'; document.body.style.overflow='hidden'; }
         function closeLightbox() { lightbox.style.display='none'; document.body.style.overflow='auto'; }
 
-        // 4. Accordion (계좌번호)
+        // 4. Accordion
         function toggleAccordion(header) {
-            const content = header.nextElementSibling;
-            const isOpen = content.style.maxHeight;
-            if (isOpen) { content.style.maxHeight = null; } 
+            var content = header.nextElementSibling;
+            if (content.style.maxHeight) { content.style.maxHeight = null; } 
             else { content.style.maxHeight = content.scrollHeight + "px"; }
         }
         function copyText(text) {
-            navigator.clipboard.writeText(text).then(() => alert('계좌번호가 복사되었습니다.'));
+            navigator.clipboard.writeText(text).then(function() { alert('계좌번호가 복사되었습니다.'); });
         }
 
-        // 5. Share Functions
-        function copyLink() {
-            navigator.clipboard.writeText(window.location.href).then(() => alert('청첩장 주소가 복사되었습니다.'));
-        }
-        
-        try {
-            Kakao.init('d7688320a63338713247d609ec6b9db2'); 
-        } catch(e) {}
-
-        function shareKakao() {
-            try {
-                Kakao.Share.sendDefault({
-                    objectType: 'feed',
-                    content: {
-                        title: '김준용 ♥ 김건희 결혼합니다',
-                        description: '2026년 3월 7일 아펠가모 반포',
-                        imageUrl: 'https://junyong.github.io/wedding-invitation/images/thumb.jpg', 
-                        link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
-                    },
-                    buttons: [{ title: '청첩장 보기', link: { mobileWebUrl: window.location.href, webUrl: window.location.href } }]
-                });
-            } catch(e) {
-                alert('카카오톡 공유 기능을 사용하려면 개발자 키 설정이 필요합니다.');
-            }
-        }
-
-        // 6. Guestbook (Read & Write)
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwpfjZAcMMTVMYEkW7Herws1m4waym7tt2TmPEDBXEQu9XBsDYT4ZN3a8Xitq-sfmA/exec';
-        const guestbookForm = document.getElementById('guestbook-form');
-        const guestbookList = document.getElementById('guestbook-list');
+        // 6. Guestbook (URL은 그대로 유지)
+        var scriptURL = 'https://script.google.com/macros/s/AKfycbwpfjZAcMMTVMYEkW7Herws1m4waym7tt2TmPEDBXEQu9XBsDYT4ZN3a8Xitq-sfmA/exec';
+        var guestbookForm = document.getElementById('guestbook-form');
+        var guestbookList = document.getElementById('guestbook-list');
 
         function loadGuestbook() {
             fetch(scriptURL)
-                .then(response => response.json())
-                .then(data => {
+                .then(function(response) { return response.json(); })
+                .then(function(data) {
                     if (!data || data.length === 0) {
                         guestbookList.innerHTML = '<div style="text-align:center; margin-top:50px; color:#aaa;">아직 작성된 축하 메시지가 없습니다.<br>첫 번째 주인공이 되어주세요!</div>';
                         return;
                     }
-                    let html = '';
-                    data.forEach(item => {
-                        let dateStr = "";
+                    var html = '';
+                    data.forEach(function(item) {
+                        var dateStr = "";
                         try {
-                            const date = new Date(item.date);
-                            dateStr = `${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,'0')}.${String(date.getDate()).padStart(2,'0')}`;
+                            var date = new Date(item.date);
+                            dateStr = date.getFullYear() + '.' + String(date.getMonth()+1).padStart(2,'0') + '.' + String(date.getDate()).padStart(2,'0');
                         } catch(e) {}
                         
-                        html += `
-                            <div class="guestbook-item">
-                                <div class="writer">${item.name}</div>
-                                <div class="message">${item.message}</div>
-                                <div class="date">${dateStr}</div>
-                            </div>
-                        `;
+                        html += '<div class="guestbook-item">' +
+                                '<div class="writer">' + item.name + '</div>' +
+                                '<div class="message">' + item.message + '</div>' +
+                                '<div class="date">' + dateStr + '</div>' +
+                                '</div>';
                     });
                     guestbookList.innerHTML = html;
                 })
-                .catch(error => {
-                    console.error('Error:', error);
+                .catch(function(error) {
                     guestbookList.innerHTML = '<div style="text-align:center; color:red;">메시지를 불러오지 못했습니다.</div>';
                 });
         }
         loadGuestbook();
 
-        guestbookForm.addEventListener('submit', e => {
+        guestbookForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            const btn = guestbookForm.querySelector('button');
-            const originalText = btn.innerText;
+            var btn = guestbookForm.querySelector('button');
+            var originalText = btn.innerText;
             btn.innerText = '등록 중...';
             btn.disabled = true;
 
             fetch(scriptURL, { method: 'POST', body: new FormData(guestbookForm)})
-                .then(response => {
+                .then(function(response) {
                     alert("축하 메시지가 등록되었습니다!");
                     guestbookForm.reset(); 
                     closeGuestbookPopup(); 
-                    setTimeout(() => loadGuestbook(), 500);
+                    setTimeout(function() { loadGuestbook(); }, 500);
                 })
-                .catch(error => alert('전송 실패! 다시 시도해주세요.'))
-                .finally(() => {
+                .catch(function(error) { alert('전송 실패! 다시 시도해주세요.'); })
+                .finally(function() {
                     btn.innerText = originalText;
                     btn.disabled = false;
                 });
@@ -612,10 +592,10 @@
         }
 
         // 7. BGM Logic
-        const bgm = document.getElementById('bgm-player');
-        const musicBtn = document.getElementById('music-btn');
-        const musicIcon = document.getElementById('music-icon');
-        let isPlaying = false;
+        var bgm = document.getElementById('bgm-player');
+        var musicBtn = document.getElementById('music-btn');
+        var musicIcon = document.getElementById('music-icon');
+        var isPlaying = false;
 
         function toggleMusic() {
             if (isPlaying) {
@@ -624,18 +604,16 @@
                 musicIcon.innerText = "🔇"; 
                 isPlaying = false;
             } else {
-                bgm.play().then(() => {
+                bgm.play().then(function() {
                     musicBtn.classList.add('playing');
                     musicIcon.innerText = "🎵"; 
-                }).catch(e => console.log("재생 실패: ", e));
+                }).catch(function(e) { console.log("재생 실패"); });
                 isPlaying = true;
             }
         }
 
         document.body.addEventListener('click', function firstPlay() {
-            if (!isPlaying) {
-                toggleMusic();
-            }
+            if (!isPlaying) { toggleMusic(); }
             document.body.removeEventListener('click', firstPlay); 
         }, { once: true });
     </script>
