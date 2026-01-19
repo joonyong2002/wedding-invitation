@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta property="og:title" content="김준용 & 김건희 결혼합니다">
+    <meta property="og:description" content="2026년 3월 7일 오후 12시 30분, 아펠가모 반포">
+    <meta property="og:image" content="images/thumb.jpg">
+    
+    <title>김준용 & 김건희의 청첩장</title>
+    
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.0/kakao.min.js" integrity="sha384-l+xbElFSnPZ2rOaPrU//2FF5B4LB8FiX5q4fXYTlvy74jIFrcu0kCpLEkKGYNKdL" crossorigin="anonymous"></script>
+
+    <style>
+        /* [전역 변수] */
+        :root {
+            --main-color: #333;
+            --bg-color: #fff;
+            --accent-color: #aa9d86;
+            --point-color: #e88ca6;
+            --gray-bg: #f9f9f9;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: "Pretendard Variable", "Pretendard", sans-serif;
+            margin: 0; padding: 0;
+            color: var(--main-color);
+            background-color: var(--bg-color);
+            line-height: 2.0; 
+            word-break: keep-all;
+            overflow-x: hidden;
+        }
+
+        /* [공통 레이아웃] */
+        section { margin-bottom: 70px; padding: 0 20px; text-align: center; }
+        h2 {
+            font-size: 1.1rem; color: var(--accent-color);
+            margin-bottom: 30px; letter-spacing: 2px;
+            text-transform: uppercase; font-weight: 600;
+        }
+        .divider {
+            width: 100%; height: 10px; background: var(--gray-bg);
+            margin: 50px 0; border: none;
+        }
+
+        /* [Hero] */
+        .hero { position: relative; width: 100%; height: auto; margin-bottom: 0; }
+        .hero img { width: 100%; height: auto; display: block; }
+        .hero-text {
+            padding: 40px 20px 20px 20px; text-align: center;
+        }
+        .hero-text .names { font-size: 1.8rem; font-weight: 700; margin: 15px 0; }
+        .hero-text .date-place { color: #555; font-size: 1rem; }
+
+        /* [Profile Section] 신랑신부 프로필 (업그레이드) */
+        .profile-section {
+            margin-top: 50px;
+        }
+        .profile-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .profile-header .icon {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .profile-header h3 {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+            margin: 0;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        /* 2열 그리드 배치 (사진 옆에 사진) */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* 1:1 비율로 나눔 */
+            gap: 20px; /* 사이 간격 */
+            text-align: left; /* 텍스트 왼쪽 정렬 */
+        }
+        
+        .profile-card {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-img-box {
+            width: 100%;
+            /* 사진 비율 (정사각형 1:1 또는 4:5 추천) */
+            aspect-ratio: 1 / 1; 
+            overflow: hidden;
+            margin-bottom: 15px;
+            background-color: #f0f0f0;
+        }
+        .profile-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 꽉 차게 */
+            transition: transform 0.5s;
+        }
+        .profile-img-box:hover img {
+            transform: scale(1.05); /* 살짝 커지는 효과 */
+        }
+
+        .profile-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+            border-bottom: 1px solid #eee; /* 이름 아래 살짝 줄 긋기 (선택) */
+            padding-bottom: 10px;
+        }
+        
+        .profile-desc {
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.6;
+            /* 긴 글도 자연스럽게 줄바꿈 */
+            word-break: keep-all; 
+            letter-spacing: -0.03em;
+        }
+
+        /* [모바일 대응] 화면이 너무 좁으면(350px 이하) 위아래로 배치 */
+        @media screen and (max-width: 350px) {
+            .profile-container {
+                grid-template-columns: 1fr; /* 1열로 변경 */
+                gap: 40px;
+            }
+        }
+        /* 전화/문자 버튼 */
+        .contact-btn-group { display: flex; gap: 5px; justify-content: center; margin-top: 10px; }
+        .contact-btn {
+            width: 30px; height: 30px; border-radius: 50%;
+            background: #f0f0f0; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; color: #555; font-size: 0.8rem;
+        }
+
+        /* [Calendar & D-day] */
+        .calendar-wrap {
+            padding: 20px; background: var(--gray-bg); border-radius: 10px;
+            display: inline-block; margin-bottom: 20px;
+        }
+        .calendar-table { width: 100%; border-collapse: collapse; }
+        .calendar-table th { color: #888; font-size: 0.8rem; padding-bottom: 10px; }
+        .calendar-table td { padding: 8px; font-size: 0.95rem; width: 35px; height: 35px; }
+        .d-day-circle {
+            background-color: var(--accent-color); color: white;
+            border-radius: 50%; width: 32px; height: 32px; line-height: 32px;
+            display: inline-block;
+        }
+        .countdown-timer {
+            font-size: 1.1rem; color: #333; font-variant-numeric: tabular-nums;
+            letter-spacing: -0.5px;
+        }
+
+        /* [Location] */
+        .transport-box {
+            margin-top: 30px; background-color: var(--gray-bg);
+            padding: 25px 20px; border-radius: 10px; text-align: left;
+        }
+        .transport-title { font-weight: bold; color: var(--accent-color); margin-bottom: 5px; }
+        .transport-desc { font-size: 0.9rem; color: #555; margin-bottom: 20px; }
+        .map-buttons { display: flex; gap: 10px; margin-top: 20px; }
+        .btn-map {
+            flex: 1; padding: 12px; border: 1px solid #ddd; background: white;
+            border-radius: 5px; cursor: pointer;
+        }
+
+        /* [Notice] 안내사항 (화환 사양) */
+        .notice-box {
+            border: 1px solid #ddd; padding: 20px; border-radius: 8px;
+            margin-top: 20px; font-size: 0.9rem; color: #555;
+        }
+
+        /* [Gallery] */
+        .gallery-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px;
+        }
+        .gallery-item {
+            position: relative; width: 100%; padding-bottom: 100%;
+            overflow: hidden; cursor: pointer; background: #eee;
+        }
+        .gallery-item img {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        .gallery-item.hidden { display: none; }
+        .btn-more {
+            padding: 10px 30px; border: 1px solid #ddd; background: white;
+            border-radius: 20px; margin-top: 20px; cursor: pointer;
+        }
+
+        /* [Account] 마음 전하실 곳 (아코디언) */
+        .accordion { margin-top: 10px; }
+        .accordion-item { border-bottom: 1px solid #eee; }
+        .accordion-header {
+            width: 100%; padding: 15px; text-align: left; background: white;
+            border: none; outline: none; cursor: pointer; font-size: 0.9rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .accordion-content {
+            max-height: 0; overflow: hidden; transition: max-height 0.2s ease-out;
+            background: var(--gray-bg);
+        }
+        .account-row {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px; font-size: 0.8rem;
+        }
+        .btn-copy {
+            padding: 5px 10px; background: #fff; border: 1px solid #ddd;
+            border-radius: 3px; font-size: 0.8rem; cursor: pointer;
+        }
+
+        /* [Guestbook] 방명록 */
+        .guestbook-form input, .guestbook-form textarea {
+            width: 100%; padding: 12px; margin-bottom: 10px;
+            border: 1px solid #ddd; border-radius: 5px; font-family: inherit;
+        }
+        .btn-submit {
+            width: 100%; padding: 15px; background: var(--main-color);
+            color: white; border: none; border-radius: 5px; cursor: pointer;
+        }
+
+        /* [Ending & Share] */
+        .ending-photo img { width: 100%; border-radius: 8px; }
+        .share-buttons { display: flex; gap: 10px; justify-content: center; margin-top: 30px; }
+        .btn-share {
+            padding: 12px 25px; border-radius: 30px; border: none;
+            font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 8px;
+        }
+        .btn-kakao { background: #FEE500; color: #000; }
+        .btn-link { background: #eee; color: #333; }
+
+        footer { font-size: 0.8rem; color: #aaa; padding: 40px 20px; background: #333; color: white; text-align: center;}
+        
+        /* [320px 대응] */
+        @media screen and (max-width: 350px) {
+            section { padding: 0 15px !important; }
+            .invitation-text p { font-size: 0.95rem !important; letter-spacing: -0.05em !important; }
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 9999;
+            display: none; justify-content: center; align-items: center;
+        }
+        .lightbox img { max-width: 100%; max-height: 100vh; object-fit: contain; }
+        .lightbox-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 3rem; cursor: pointer; }
+        /* [Guestbook List] 게시판 스타일 */
+        .guestbook-list {
+            width: 100%;
+            max-width: 500px;
+            height: 300px; /* 높이 고정 */
+            overflow-y: auto; /* 스크롤 생김 */
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 0 auto 20px auto;
+            border: 1px solid #eee;
+            text-align: left;
+        }
+        .guestbook-item {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+            font-size: 0.9rem;
+        }
+        .guestbook-item .writer {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+        }
+        .guestbook-item .message {
+            color: #333;
+            line-height: 1.4;
+        }
+        .guestbook-item .date {
+            font-size: 0.7rem;
+            color: #aaa;
+            text-align: right;
+            margin-top: 5px;
+        }
+        .guestbook-loading { text-align: center; color: #999; margin-top: 100px; }
+
+        /* [Write Button] */
+        .btn-write {
+            padding: 12px 25px;
+            background-color: var(--point-color); /* 핑크색 포인트 */
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(232, 140, 166, 0.3);
+            transition: transform 0.2s;
+        }
+        .btn-write:hover { transform: scale(1.05); }
+
+        /* [Popup Modal] */
+        .guestbook-popup {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); z-index: 10000;
+            display: none; justify-content: center; align-items: center;
+        }
+        .popup-content {
+            background: white; width: 90%; max-width: 350px;
+            padding: 25px; border-radius: 15px; position: relative;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+        .popup-content h3 { margin-top: 0; color: var(--main-color); margin-bottom: 20px; }
+        .popup-close {
+            position: absolute; top: 10px; right: 15px;
+            font-size: 1.8rem; cursor: pointer; color: #aaa;
+        }
+        .popup-content input, .popup-content textarea {
+            width: 100%; padding: 12px; margin-bottom: 10px;
+            border: 1px solid #ddd; border-radius: 5px; font-family: inherit;
+        }
+        /* [BGM Control] 우측 상단 뮤직 버튼 */
+        .music-control {
+            position: fixed;
+            top: 20px; right: 20px;
+            width: 40px; height: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 10000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .music-icon {
+            font-size: 1.2rem;
+            animation: none; /* 기본은 정지 */
+        }
+        /* 재생 중일 때 빙글빙글 돌기 */
+        .music-control.playing .music-icon {
+            animation: spin 4s linear infinite;
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <audio id="bgm-player" loop>
+        <source src="bgm.mp3" type="audio/mp3">
+    </audio>
+    <div id="music-btn" class="music-control" onclick="toggleMusic()">
+        <span id="music-icon" class="music-icon">🔇</span> </div>
+
+    <div class="hero">
+        <img src="images/main.jpg" alt="Main Photo">
+        <div class="hero-text" data-aos="fade-up">
+            <div style="color:var(--accent-color); font-weight:700; letter-spacing:2px; margin-bottom:10px;">WEDDING INVITATION</div>
+            <div class="names">김준용 & 김건희</div>
+            <div class="date-place">2026. 03. 07 SAT 12:30 PM<br>아펠가모 반포</div>
+        </div>
+    </div>
+
+    <section data-aos="fade-up" class="invitation-text">
+        <h2>Invitation</h2>
+        <p>
+            2020년 겨울에 만난 두 사람이<br> 
+            여섯 번의 해를 지나 따스한 봄날,<br>
+            부부가 됩니다.<br><br>
+
+            오랜 시간 변함없이 서로의 곁을<br>
+            지켜온 마음으로 지혜롭고 현명한<br>
+            가정을 꾸리겠습니다.<br><br>
+
+            귀한 걸음 하시어 저희의 앞날을<br>
+            격려해 주시면 감사하겠습니다.
+        </p>
+        
+        <div style="margin-top: 30px; font-size: 1.1rem;">
+            <strong>김준용 · 조한숙</strong>의 아들 <strong>준용</strong><br>
+            <strong>김동진 · 박경우</strong>의 딸 <strong>건희</strong>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-header">
+                <h3>신랑신부 프로필</h3>
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-card">
+                    <div class="profile-img-box">
+                        <img src="images/groom.jpg" alt="신랑 김준용">
+                    </div>
+                    <div class="profile-name">신랑_김준용</div>
+                    <div class="profile-desc">
+                        첫인상은 차갑다는 말을 종종 듣지만, 
+                        알고 보면 따뜻하고 마음이 넓은 사람입니다. 
+                        그 모습을 알아봐 준 신부에게 조용히, 
+                        하지만 깊이 마음이 갔다고 합니다.
+                    </div>
+                </div>
+
+                <div class="profile-card">
+                    <div class="profile-img-box">
+                        <img src="images/bride.jpg" alt="신부 김건희">
+                    </div>
+                    <div class="profile-name">신부_김건희</div>
+                    <div class="profile-desc">
+                        항상 웃음이 많고, 
+                        신랑 눈에는 참 사랑스러워 보여 
+                        반하지 않을 수 없었다고 합니다. 
+                        강아지와 먹을 것 앞에서 가장 행복해집니다.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section data-aos="fade-up">
+        <h2>Calendar</h2>
+        <div class="calendar-wrap">
+            <div style="font-size:1.2rem; font-weight:bold; margin-bottom:15px;">2026. 03</div>
+            <table class="calendar-table">
+                <thead><tr><th style="color:#ff6b6b">S</th><th>M</th><th>T</th><th>W</th><th>T</th><th>F</th><th>S</th></tr></thead>
+                <tbody>
+                    <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td><span class="d-day-circle">7</span></td></tr>
+                    <tr><td style="color:#ff6b6b">8</td><td>9</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+                    <tr><td style="color:#ff6b6b">15</td><td>16</td><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td></tr>
+                    <tr><td style="color:#ff6b6b">22</td><td>23</td><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td></tr>
+                    <tr><td style="color:#ff6b6b">29</td><td>30</td><td>31</td><td></td><td></td><td></td><td></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="d-day-text"></div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section data-aos="fade-up">
+        <h2>Location</h2>
+        <p style="font-size:1.2rem; font-weight:bold; margin-bottom:10px;">아펠가모 반포</p>
+        <img src="images/map.jpg" alt="약도" style="width:100%; border-radius:8px; border:1px solid #eee; margin-bottom:15px;">
+        <p style="color:#666; font-size:0.95rem; margin-bottom:20px;">서울 서초구 반포대로 235 효성빌딩 LL층<br>(반포동 63-7)</p>
+        
+        <div class="map-buttons">
+            <button class="btn-map" onclick="window.open('https://map.naver.com/v5/search/아펠가모%20반포')">네이버 지도</button>
+            <button class="btn-map" onclick="window.open('https://map.kakao.com/link/search/아펠가모%20반포')">카카오 맵</button>
+        </div>
+
+        <div class="transport-box">
+            <div class="transport-title">지하철</div>
+            <p class="transport-desc"><strong>고속터미널역 (3,7,9호선)</strong><br>8-1번 출구 도보 7분<br><strong>사평역 (9호선)</strong><br>2번 출구 도보 5분</p>
+            <div class="transport-title">버스</div>
+            <p class="transport-desc"><strong>고속터미널 정류장 하차</strong><br>간선버스 : 142, 148, 360<br>지선버스 : 3414, 4318<br>(하차 후 도보 약 5~7분)</p>
+            <div class="transport-title">주차</div>
+            <p class="transport-desc">건물 내 지하주차장 이용</p>
+            <span style="font-size:0.85rem; color:#888;">(주차 혼잡이 예상되오니 가급적 대중교통 이용을 권장드립니다)</span>
+        </div>
+
+        <div class="notice-box">
+            <p><strong>[안내]</strong><br>축하해주시는 마음 감사히 받겠습니다.<br>화환은 정중히 사양합니다.</p>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section id="gallery-section" data-aos="fade-up">
+        <h2>Gallery</h2>
+        <div class="gallery-grid" id="gallery-grid"></div>
+        <button id="btn-toggle" class="btn-more" onclick="toggleGallery()">사진 더보기</button>
+    </section>
+
+    <div class="divider"></div>
+
+    <section data-aos="fade-up">
+        <h2>마음 전하실 곳</h2>
+        <p style="font-size:0.9rem; margin-bottom:20px;">참석이 어려우신 분들을 위해<br>계좌번호를 기재하였습니다.</p>
+        
+        <div class="accordion">
+            <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">신랑측 계좌번호</button>
+                <div class="accordion-content">
+                    <div class="account-row">
+                        <span>김준용</span>
+                        <span>국민 28190204081132 (예금주)</span>
+                        <button class="btn-copy" onclick="copyText('28190204081132')">복사</button>
+                    </div>
+                    <div class="account-row">
+                        <span>김준용</span>
+                        <span>국민 28190204081132 (예금주)</span>
+                        <button class="btn-copy" onclick="copyText('28190204081132')">복사</button>
+                    </div>
+                    <div class="account-row">
+                        <span>김준용</span>
+                        <span>국민 28190204081132 (예금주)</span>
+                        <button class="btn-copy" onclick="copyText('28190204081132')">복사</button>
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header" onclick="toggleAccordion(this)">신부측 계좌번호</button>
+                <div class="accordion-content">
+                    <div class="account-row">
+                        <span>김준용</span>
+                        <span>국민 28190204081132 (예금주)</span>
+                        <button class="btn-copy" onclick="copyText('28190204081132')">복사</button>
+                    </div>
+                    <div class="account-row">
+                        <span>김준용</span>
+                        <span>국민 28190204081132 (예금주)</span>
+                        <button class="btn-copy" onclick="copyText('28190204081132')">복사</button>
+                    </div>
+                    <div class="account-row">
+                        <span>김준용</span>
+                        <span>국민 28190204081132 (예금주)</span>
+                        <button class="btn-copy" onclick="copyText('28190204081132')">복사</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <section data-aos="fade-up" id="guestbook-section">
+        <h2>축하의 말 전하기</h2>
+        <p style="font-size:0.9rem; margin-bottom:20px;">따뜻한 마음을 한 줄 남겨주세요.</p>
+        
+        <div class="guestbook-list" id="guestbook-list">
+            <div class="guestbook-loading">메시지를 불러오는 중입니다...</div>
+            </div>
+
+        <button class="btn-write" onclick="openGuestbookPopup()">
+            🖊️ 축하 메시지 남기기
+        </button>
+    </section>
+
+    <div id="guestbook-popup" class="guestbook-popup">
+        <div class="popup-content">
+            <span class="popup-close" onclick="closeGuestbookPopup()">&times;</span>
+            <h3>축하 메시지</h3>
+            <form id="guestbook-form">
+                <input type="text" name="이름" required placeholder="성함" maxlength="10">
+                <textarea name="축하메시지" required placeholder="축하의 말을 남겨주세요 (50자 이내)" maxlength="50" rows="3"></textarea>
+                <button type="submit" class="btn-submit">등록하기</button>
+            </form>
+        </div>
+    </div>
+
+    <section data-aos="fade-up">
+        <div class="ending-photo">
+            <img src="images/ending.jpg" alt="Thanks"> 
+        </div>
+        <div style="margin-top:20px; font-size:0.9rem; color:#888;">
+            저희의 시작을 함께해주셔서 감사합니다.
+        </div>
+
+        <div class="share-buttons">
+            <button class="btn-share btn-kakao" onclick="shareKakao()">
+                <img src="https://developers.kakao.com/assets/img/about/logos/kakaotalksharing/kakaotalk_sharing_btn_medium.png" alt="카톡" style="width:20px;">
+                카카오톡 공유
+            </button>
+            <button class="btn-share btn-link" onclick="copyLink()">
+                🔗 링크 복사
+            </button>
+        </div>
+    </section>
+
+    <footer>
+        <p>Copyright 2026. Junyong & Keonhee. All rights reserved.</p>
+    </footer>
+
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()"><span class="lightbox-close">&times;</span><img id="lightbox-img" src=""></div>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 100 });
+
+        // 1. D-Day
+        const weddingDate = new Date('2026-03-07T12:30:00');
+        const dDayText = document.getElementById('d-day-text');
+        function updateDday() {
+            const now = new Date();
+            const diff = weddingDate - now;
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((diff / (1000 * 60)) % 60);
+                const seconds = Math.floor((diff / 1000) % 60);
+                dDayText.innerHTML = `<div style="margin-bottom:10px; color:#888;">두 사람이 하나가 되기까지</div><div class="countdown-timer"><span style="color:var(--point-color); font-weight:bold; font-size:1.3rem;">${days}일</span> ${hours}시간 ${minutes}분 ${seconds}초<br><span style="font-size:0.9rem; color:#555;">남았습니다</span></div>`;
+            } else {
+                dDayText.innerHTML = "결혼식이 진행되었습니다."; clearInterval(timer);
+            }
+        }
+        const timer = setInterval(updateDday, 1000); updateDday();
+
+        // 2. Gallery
+        const PHOTO_COUNT = 28; const VISIBLE_COUNT = 9; const PHOTO_PATH = 'images/photo_';
+        const grid = document.getElementById('gallery-grid');
+        let isExpanded = false;
+        function renderGallery() {
+            let html = '';
+            for(let i=1; i<=PHOTO_COUNT; i++) {
+                const hidden = i > VISIBLE_COUNT ? 'hidden' : '';
+                let src = `${PHOTO_PATH}${i}.jpg`; 
+                html += `<div class="gallery-item ${hidden}" onclick="openLightbox('${src}')"><img src="${src}" loading="lazy"></div>`;
+            }
+            grid.innerHTML = html;
+        }
+        function toggleGallery() {
+            const items = document.querySelectorAll('.gallery-item');
+            const btn = document.getElementById('btn-toggle');
+            if(!isExpanded) { items.forEach(i=>i.classList.remove('hidden')); btn.innerText="사진 접기"; isExpanded=true; }
+            else { items.forEach((i,idx)=>{if(idx>=VISIBLE_COUNT) i.classList.add('hidden')}); btn.innerText="사진 더보기"; isExpanded=false; document.getElementById('gallery-section').scrollIntoView({behavior:'smooth'}); }
+        }
+        renderGallery();
+
+        // 3. Lightbox
+        const lightbox = document.getElementById('lightbox');
+        const lbImg = document.getElementById('lightbox-img');
+        function openLightbox(src) { lbImg.src=src; lightbox.style.display='flex'; document.body.style.overflow='hidden'; }
+        function closeLightbox() { lightbox.style.display='none'; document.body.style.overflow='auto'; }
+
+        // 4. Accordion (계좌번호)
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+            const isOpen = content.style.maxHeight;
+            if (isOpen) { content.style.maxHeight = null; } 
+            else { content.style.maxHeight = content.scrollHeight + "px"; }
+        }
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => alert('계좌번호가 복사되었습니다.'));
+        }
+
+        // 5. Share Functions
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => alert('청첩장 주소가 복사되었습니다.'));
+        }
+        
+        // ⚠️ TODO: 카카오 개발자 키 설정 필요 (https://developers.kakao.com)
+        try {
+            Kakao.init('YOUR_KAKAO_JAVASCRIPT_KEY'); // 여기에 키 입력
+        } catch(e) {}
+
+        function shareKakao() {
+            try {
+                Kakao.Share.sendDefault({
+                    objectType: 'feed',
+                    content: {
+                        title: '김준용 ♥ 김건희 결혼합니다',
+                        description: '2026년 3월 7일 아펠가모 반포',
+                        imageUrl: 'https://본인도메인/images/thumb.jpg', // ⚠️ 웹에 올라간 실제 이미지 주소여야 함
+                        link: { mobileWebUrl: window.location.href, webUrl: window.location.href }
+                    },
+                    buttons: [{ title: '청첩장 보기', link: { mobileWebUrl: window.location.href, webUrl: window.location.href } }]
+                });
+            } catch(e) {
+                alert('카카오톡 공유 기능을 사용하려면 개발자 키 설정이 필요합니다.');
+            }
+        }
+
+        // ==========================================
+        // 6. [UPGRADE] Guestbook (Read & Write)
+        // ==========================================
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwpfjZAcMMTVMYEkW7Herws1m4waym7tt2TmPEDBXEQu9XBsDYT4ZN3a8Xitq-sfmA/exec'; // ⚠️ URL 확인 필수!
+        const guestbookForm = document.getElementById('guestbook-form');
+        const guestbookList = document.getElementById('guestbook-list');
+
+        // [1] 게시글 불러오기 (Read)
+        function loadGuestbook() {
+            fetch(scriptURL)
+                .then(response => response.json())
+                .then(data => {
+                    // 데이터가 없거나 비어있을 때
+                    if (!data || data.length === 0) {
+                        guestbookList.innerHTML = '<div style="text-align:center; margin-top:50px; color:#aaa;">아직 작성된 축하 메시지가 없습니다.<br>첫 번째 주인공이 되어주세요!</div>';
+                        return;
+                    }
+
+                    // 리스트 렌더링
+                    let html = '';
+                    data.forEach(item => {
+                        // 날짜 포맷팅 (YYYY.MM.DD)
+                        let dateStr = "";
+                        try {
+                            const date = new Date(item.date);
+                            dateStr = `${date.getFullYear()}.${String(date.getMonth()+1).padStart(2,'0')}.${String(date.getDate()).padStart(2,'0')}`;
+                        } catch(e) {}
+
+                        // HTML 조립
+                        html += `
+                            <div class="guestbook-item">
+                                <div class="writer">${item.name}</div>
+                                <div class="message">${item.message}</div>
+                                <div class="date">${dateStr}</div>
+                            </div>
+                        `;
+                    });
+                    guestbookList.innerHTML = html;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    guestbookList.innerHTML = '<div style="text-align:center; color:red;">메시지를 불러오지 못했습니다.</div>';
+                });
+        }
+
+        // 페이지 로드 시 글 목록 불러오기
+        loadGuestbook();
+
+        // [2] 게시글 작성하기 (Write)
+        guestbookForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const btn = guestbookForm.querySelector('button');
+            const originalText = btn.innerText;
+            btn.innerText = '등록 중...';
+            btn.disabled = true;
+
+            fetch(scriptURL, { method: 'POST', body: new FormData(guestbookForm)})
+                .then(response => {
+                    alert("축하 메시지가 등록되었습니다!");
+                    guestbookForm.reset(); // 입력창 비우기
+                    closeGuestbookPopup(); // 팝업 닫기
+                    
+                    // ✅ [여기가 핵심] 목록을 다시 불러옵니다!
+                    setTimeout(() => loadGuestbook(), 500);
+                })
+                .catch(error => alert('전송 실패! 다시 시도해주세요.'))
+                .finally(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                });
+        });
+        
+        // [3] 팝업 열기/닫기 기능
+        function openGuestbookPopup() {
+            document.getElementById('guestbook-popup').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // 배경 스크롤 막기
+        }
+        function closeGuestbookPopup() {
+            document.getElementById('guestbook-popup').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        
+        };
+        // ==========================================
+        // 7. [NEW] BGM Logic
+        // ==========================================
+        const bgm = document.getElementById('bgm-player');
+        const musicBtn = document.getElementById('music-btn');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        function toggleMusic() {
+            if (isPlaying) {
+                bgm.pause();
+                musicBtn.classList.remove('playing');
+                musicIcon.innerText = "🔇"; // 꺼짐 아이콘
+                isPlaying = false;
+            } else {
+                bgm.play().then(() => {
+                    musicBtn.classList.add('playing');
+                    musicIcon.innerText = "🎵"; // 켜짐 아이콘
+                }).catch(e => console.log("재생 실패: ", e));
+                isPlaying = true;
+            }
+        }
+
+        // [옵션] 페이지 아무 곳이나 처음 클릭하면 음악 시작 (모바일 UX 꼼수)
+        // 원치 않으시면 이 부분은 지우셔도 됩니다.
+        document.body.addEventListener('click', function firstPlay() {
+            if (!isPlaying) {
+                toggleMusic();
+            }
+            document.body.removeEventListener('click', firstPlay); // 한 번만 실행하고 삭제
+        }, { once: true });
+    </script>
+</body>
+</html>
