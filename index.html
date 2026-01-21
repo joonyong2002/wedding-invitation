@@ -233,6 +233,31 @@
         }
         .music-control.playing .music-icon { animation: spin 4s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
+        /* [Lightbox Navigation] 추가된 스타일 */
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 3rem;
+            cursor: pointer;
+            padding: 20px;
+            z-index: 10001;
+            user-select: none;
+            transition: color 0.3s;
+        }
+        .lightbox-nav:hover { color: #fff; }
+        .lightbox-nav.prev { left: 10px; }
+        .lightbox-nav.next { right: 10px; }
+
+        /* 모바일에서는 버튼이 너무 크지 않게 조정 */
+        @media screen and (max-width: 768px) {
+            .lightbox-nav { font-size: 2rem; padding: 10px; }
+            .lightbox-nav.prev { left: 0; }
+            .lightbox-nav.next { right: 0; }
+        }
     </style>
 </head>
 <body>
@@ -453,8 +478,13 @@
         <p>Copyright 2026. Junyong & Keonhee. All rights reserved.</p>
     </footer>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()"><span class="lightbox-close">&times;</span><img id="lightbox-img" src=""></div>
-
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        
+        <button class="lightbox-nav prev" onclick="event.stopPropagation(); changeImage(-1)">&#10094;</button>
+        
+        <img id="lightbox-img" src="" onclick="event.stopPropagation();"> <button class="lightbox-nav next" onclick="event.stopPropagation(); changeImage(1)">&#10095;</button>
+    </div>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // 0. 초기화
@@ -479,19 +509,21 @@
         }
         var timer = setInterval(updateDday, 1000); updateDday();
 
-        // 2. Gallery
+        // 2. Gallery & 3. Lightbox 기능 통합 수정
         var PHOTO_COUNT = 28; 
         var VISIBLE_COUNT = 9; 
         var PHOTO_PATH = 'images/photo_';
         var grid = document.getElementById('gallery-grid');
         var isExpanded = false;
-        
+        var currentIdx = 1; // 현재 보고 있는 사진 번호 저장
+
         function renderGallery() {
             var html = '';
             for(var i=1; i<=PHOTO_COUNT; i++) {
                 var hidden = i > VISIBLE_COUNT ? 'hidden' : '';
                 var src = PHOTO_PATH + i + '.jpg'; 
-                html += '<div class="gallery-item ' + hidden + '" onclick="openLightbox(\'' + src + '\')"><img src="' + src + '" loading="lazy"></div>';
+                // [수정] openLightbox에 파일 경로 대신 번호(i)를 넘깁니다.
+                html += '<div class="gallery-item ' + hidden + '" onclick="openLightbox(' + i + ')"><img src="' + src + '" loading="lazy"></div>';
             }
             grid.innerHTML = html;
         }
@@ -510,11 +542,36 @@
         }
         renderGallery();
 
-        // 3. Lightbox
+        // [수정] 라이트박스 로직
         var lightbox = document.getElementById('lightbox');
         var lbImg = document.getElementById('lightbox-img');
-        function openLightbox(src) { lbImg.src=src; lightbox.style.display='flex'; document.body.style.overflow='hidden'; }
-        function closeLightbox() { lightbox.style.display='none'; document.body.style.overflow='auto'; }
+
+        // 번호를 받아서 이미지를 띄움
+        function openLightbox(idx) { 
+            currentIdx = idx; // 현재 번호 저장
+            updateLightboxImage();
+            lightbox.style.display='flex'; 
+            document.body.style.overflow='hidden'; 
+        }
+
+        function closeLightbox() { 
+            lightbox.style.display='none'; 
+            document.body.style.overflow='auto'; 
+        }
+
+        // 이미지 소스 업데이트 함수
+        function updateLightboxImage() {
+            lbImg.src = PHOTO_PATH + currentIdx + '.jpg';
+        }
+
+        // [추가] 이전/다음 이미지 변경 함수
+        function changeImage(step) {
+            currentIdx += step;
+            // 1번에서 뒤로 가면 마지막 사진으로, 마지막에서 앞으로 가면 1번으로 순환
+            if (currentIdx > PHOTO_COUNT) currentIdx = 1;
+            if (currentIdx < 1) currentIdx = PHOTO_COUNT;
+            updateLightboxImage();
+        }
 
         // 4. Accordion
         function toggleAccordion(header) {
@@ -619,4 +676,3 @@
     </script>
 </body>
 </html>
-
