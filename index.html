@@ -13,8 +13,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap" rel="stylesheet">
-
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         /* [전역 변수] */
@@ -221,11 +222,44 @@
             section { padding: 0 15px !important; }
         }
 
-        /* Lightbox & Music */
-        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: none; justify-content: center; align-items: center; }
-        .lightbox img { max-width: 100%; max-height: 100vh; object-fit: contain; }
-        .lightbox-close { position: absolute; top: 20px; right: 20px; color: white; font-size: 3rem; cursor: pointer; }
+        /* [Lightbox & Swiper Styles - 수정됨] */
+        .lightbox-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95); z-index: 10001;
+            display: none; /* 기본 숨김 */
+            justify-content: center; align-items: center;
+        }
+        
+        .swiper {
+            width: 100%; height: 100%;
+        }
+        
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .swiper-slide img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
 
+        /* Swiper Navigation Custom */
+        .swiper-button-next, .swiper-button-prev { color: rgba(255,255,255,0.7) !important; }
+        .swiper-button-next:after, .swiper-button-prev:after { font-size: 2rem !important; }
+
+        /* 닫기 버튼 */
+        .lightbox-close { 
+            position: absolute; top: 20px; right: 20px; 
+            color: white; font-size: 3rem; cursor: pointer; z-index: 10002; 
+        }
+
+        /* Music Control */
         .music-control {
             position: fixed; top: 20px; right: 20px; width: 40px; height: 40px;
             background: rgba(255, 255, 255, 0.9); border: 1px solid #ccc; border-radius: 50%;
@@ -233,31 +267,6 @@
         }
         .music-control.playing .music-icon { animation: spin 4s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        /* [Lightbox Navigation] 추가된 스타일 */
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 3rem;
-            cursor: pointer;
-            padding: 20px;
-            z-index: 10001;
-            user-select: none;
-            transition: color 0.3s;
-        }
-        .lightbox-nav:hover { color: #fff; }
-        .lightbox-nav.prev { left: 10px; }
-        .lightbox-nav.next { right: 10px; }
-
-        /* 모바일에서는 버튼이 너무 크지 않게 조정 */
-        @media screen and (max-width: 768px) {
-            .lightbox-nav { font-size: 2rem; padding: 10px; }
-            .lightbox-nav.prev { left: 0; }
-            .lightbox-nav.next { right: 0; }
-        }
     </style>
 </head>
 <body>
@@ -478,14 +487,20 @@
         <p>Copyright 2026. Junyong & Keonhee. All rights reserved.</p>
     </footer>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <div id="lightbox-overlay" class="lightbox-overlay" onclick="closeLightbox()">
         <span class="lightbox-close">&times;</span>
         
-        <button class="lightbox-nav prev" onclick="event.stopPropagation(); changeImage(-1)">&#10094;</button>
-        
-        <img id="lightbox-img" src="" onclick="event.stopPropagation();"> <button class="lightbox-nav next" onclick="event.stopPropagation(); changeImage(1)">&#10095;</button>
+        <div class="swiper mySwiper" onclick="event.stopPropagation()">
+            <div class="swiper-wrapper" id="swiper-wrapper">
+                </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
     </div>
+
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
     <script>
         // 0. 초기화
         AOS.init({ once: true, offset: 100 });
@@ -509,25 +524,35 @@
         }
         var timer = setInterval(updateDday, 1000); updateDday();
 
-        // 2. Gallery & 3. Lightbox 기능 통합 수정
+        // 2. Gallery & Swiper 통합
         var PHOTO_COUNT = 28; 
         var VISIBLE_COUNT = 9; 
         var PHOTO_PATH = 'images/photo_';
         var grid = document.getElementById('gallery-grid');
+        var swiperWrapper = document.getElementById('swiper-wrapper');
         var isExpanded = false;
-        var currentIdx = 1; // 현재 보고 있는 사진 번호 저장
+        var gallerySwiper = null; // Swiper 인스턴스 저장 변수
 
-        function renderGallery() {
-            var html = '';
+        // 2-1. 갤러리 그리드(썸네일) 생성 & Swiper 슬라이드 미리 생성
+        function initGallery() {
+            var gridHtml = '';
+            var swiperHtml = '';
+
             for(var i=1; i<=PHOTO_COUNT; i++) {
+                var src = PHOTO_PATH + i + '.jpg';
+                
+                // 그리드용 HTML
                 var hidden = i > VISIBLE_COUNT ? 'hidden' : '';
-                var src = PHOTO_PATH + i + '.jpg'; 
-                // [수정] openLightbox에 파일 경로 대신 번호(i)를 넘깁니다.
-                html += '<div class="gallery-item ' + hidden + '" onclick="openLightbox(' + i + ')"><img src="' + src + '" loading="lazy"></div>';
+                // [중요] 클릭 시 openLightbox(인덱스) 호출. Swiper는 0부터 시작하므로 i-1
+                gridHtml += '<div class="gallery-item ' + hidden + '" onclick="openLightbox(' + (i-1) + ')"><img src="' + src + '" loading="lazy"></div>';
+
+                // Swiper용 슬라이드 HTML (Zoom 기능 포함)
+                swiperHtml += '<div class="swiper-slide"><div class="swiper-zoom-container"><img src="' + src + '" loading="lazy"></div></div>';
             }
-            grid.innerHTML = html;
+            grid.innerHTML = gridHtml;
+            swiperWrapper.innerHTML = swiperHtml;
         }
-        
+
         function toggleGallery() {
             var items = document.querySelectorAll('.gallery-item');
             var btn = document.getElementById('btn-toggle');
@@ -540,38 +565,39 @@
                 document.getElementById('gallery-section').scrollIntoView({behavior:'smooth'}); 
             }
         }
-        renderGallery();
+        initGallery();
 
-        // [수정] 라이트박스 로직
-        var lightbox = document.getElementById('lightbox');
-        var lbImg = document.getElementById('lightbox-img');
+        // 3. Swiper Lightbox Logic
+        var lightboxOverlay = document.getElementById('lightbox-overlay');
 
-        // 번호를 받아서 이미지를 띄움
-        function openLightbox(idx) { 
-            currentIdx = idx; // 현재 번호 저장
-            updateLightboxImage();
-            lightbox.style.display='flex'; 
-            document.body.style.overflow='hidden'; 
+        function openLightbox(index) {
+            lightboxOverlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+
+            // Swiper가 아직 없으면 생성, 있으면 해당 인덱스로 이동
+            if (!gallerySwiper) {
+                gallerySwiper = new Swiper(".mySwiper", {
+                    initialSlide: index, // 클릭한 사진부터 시작
+                    spaceBetween: 30, // 사진 사이 간격
+                    effect: "slide", // 부드러운 슬라이드
+                    loop: true, // 무한 루프
+                    zoom: true, // 핀치 줌(확대) 기능 활성화
+                    navigation: {
+                        nextEl: ".swiper-button-next",
+                        prevEl: ".swiper-button-prev",
+                    },
+                });
+            } else {
+                // 이미 생성되어 있다면 해당 슬라이드로 이동 (loop 모드 고려)
+                gallerySwiper.slideToLoop(index, 0);
+            }
         }
 
-        function closeLightbox() { 
-            lightbox.style.display='none'; 
-            document.body.style.overflow='auto'; 
+        function closeLightbox() {
+            lightboxOverlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
-        // 이미지 소스 업데이트 함수
-        function updateLightboxImage() {
-            lbImg.src = PHOTO_PATH + currentIdx + '.jpg';
-        }
-
-        // [추가] 이전/다음 이미지 변경 함수
-        function changeImage(step) {
-            currentIdx += step;
-            // 1번에서 뒤로 가면 마지막 사진으로, 마지막에서 앞으로 가면 1번으로 순환
-            if (currentIdx > PHOTO_COUNT) currentIdx = 1;
-            if (currentIdx < 1) currentIdx = PHOTO_COUNT;
-            updateLightboxImage();
-        }
 
         // 4. Accordion
         function toggleAccordion(header) {
@@ -583,7 +609,7 @@
             navigator.clipboard.writeText(text).then(function() { alert('계좌번호가 복사되었습니다.'); });
         }
 
-        // 6. Guestbook (URL은 그대로 유지)
+        // 6. Guestbook
         var scriptURL = 'https://script.google.com/macros/s/AKfycbwpfjZAcMMTVMYEkW7Herws1m4waym7tt2TmPEDBXEQu9XBsDYT4ZN3a8Xitq-sfmA/exec';
         var guestbookForm = document.getElementById('guestbook-form');
         var guestbookList = document.getElementById('guestbook-list');
